@@ -12,17 +12,16 @@ public class MapDecorator extends SmartArrayDecorator {
     public MapDecorator(SmartArray smartArray, MyFunction function) {
         super(smartArray);
         this.function = function;
-        apply(smartArray);
     }
 
     @Override
-    protected void apply(SmartArray sa) {
-        int len = sa.size();
-        Object[] array = sa.toArray();
-        Object[] localArray = new Object[len];
+    public Object[] toArray() {
+        Object[] array = smartArray.toArray();
+        int len = array.length;
+        array = Arrays.copyOf(array, len);
         for (int i = 0; i < len; i++) {
-            localArray[i] = function.apply(array[i]);
+            array[i] = function.apply(array[i]);
         }
-        super.apply(new BaseArray(localArray));
+        return array;
     }
 }

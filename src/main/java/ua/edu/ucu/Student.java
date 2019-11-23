@@ -2,7 +2,6 @@ package ua.edu.ucu;
 
 
 class Student {
-
     private double GPA;
     private int year;
     private String name;

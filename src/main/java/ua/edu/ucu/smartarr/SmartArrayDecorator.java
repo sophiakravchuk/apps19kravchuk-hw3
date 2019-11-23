@@ -1,22 +1,22 @@
 package ua.edu.ucu.smartarr;
 
+import java.util.Arrays;
+
 abstract class SmartArrayDecorator implements SmartArray {
 
     protected SmartArray smartArray;
 
-    public SmartArrayDecorator(SmartArray smartArray) { }
-
-    protected void apply(SmartArray sa) { smartArray = sa; }
+    public SmartArrayDecorator(SmartArray smartArray) { this.smartArray = smartArray; }
 
     @Override
-    public Object[] toArray() { return this.smartArray.toArray(); }
+    public abstract Object[] toArray();
 
     @Override
-    public int size() { return this.smartArray.size(); }
-
-    @Override
-    public String toString() { return this.smartArray.toString(); }
+    public int size() { return this.toArray().length; }
 
     @Override
     public String operationDescription() {  return getClass().getSimpleName(); }
+
+    @Override
+    public String toString() { return Arrays.toString(this.toArray()); }
 }

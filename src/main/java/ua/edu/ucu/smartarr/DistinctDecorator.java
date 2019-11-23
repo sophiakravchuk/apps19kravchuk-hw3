@@ -1,20 +1,18 @@
 package ua.edu.ucu.smartarr;
-
-        import java.util.ArrayList;
-        import java.util.Arrays;
+import java.util.Arrays;
 
 // Remove duplicates from SmartArray. Use method equals() to compare objects
 public class DistinctDecorator extends SmartArrayDecorator{
     public DistinctDecorator(SmartArray smartArray) {
         super(smartArray);
-        apply(smartArray);
     }
 
     @Override
-    protected void apply(SmartArray sa) {
-        int len = sa.size();
+    public Object[] toArray() {
         int newLen = 0;
-        Object[] array = Arrays.copyOf(sa.toArray(), sa.size());
+        Object[] array = smartArray.toArray();
+        int len = array.length;
+        array = Arrays.copyOf(array, len);
         Object[] localArray = new Object[len];
         for (int i = 0; i < len; i++) {
             if(array[i] == null) continue;
@@ -26,10 +24,8 @@ public class DistinctDecorator extends SmartArrayDecorator{
                 }
             }
         }
-        Object[] newArr = Arrays.copyOf(localArray, newLen);
-        super.apply(new BaseArray(newArr));
+        return Arrays.copyOf(localArray, newLen);
     }
-//
-//    @Override
-//    public String operationDescription() { return "DistinctDecorator"; }
+    @Override
+    public String toString() { return super.toString(); }
 }

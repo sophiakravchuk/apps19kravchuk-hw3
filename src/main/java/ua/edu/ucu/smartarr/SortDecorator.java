@@ -12,14 +12,15 @@ public class SortDecorator extends SmartArrayDecorator {
     public SortDecorator(SmartArray smartArray, MyComparator comparator) {
         super(smartArray);
         this.comparator = comparator;
-        apply(smartArray);
     }
 
+
     @Override
-    protected void apply(SmartArray sa) {
-        int len = sa.size();
-        Object[] array = sa.toArray();
+    public Object[] toArray() {
+        Object[] array = smartArray.toArray();
+        int len = array.length;
+        array = Arrays.copyOf(array, len);
         Arrays.sort(array, comparator);
-        super.apply(new BaseArray(array));
+        return array;
     }
 }
